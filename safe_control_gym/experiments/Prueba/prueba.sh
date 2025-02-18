@@ -1,0 +1,26 @@
+#!/bin/bash
+
+SYS='quadrotor_3D'
+
+TASK='stab'
+
+ALGO='ppo'
+# ALGO='sac'
+# ALGO='safe_explorer_ppo'
+
+if [ "$SYS" == 'cartpole' ]; then
+    SYS_NAME=$SYS
+else
+    SYS_NAME='quadrotor'
+fi
+
+# RL Experiment
+python3 ./rl_experiment.py \
+    --task ${SYS_NAME} \
+    --algo ${ALGO} \
+    --overrides \
+        ./config_overrides/${SYS}/${SYS}_${TASK}.yaml \
+        ./config_overrides/${SYS}/${ALGO}_${SYS}.yaml \
+    --kv_overrides \
+        algo_config.training=False \
+        task_config.randomized_init=False

@@ -1,0 +1,2 @@
+para ejectuar un programa, antes:
+sed -i -e 's/\r$//' pid_experiment.sh
